@@ -9,6 +9,17 @@ This is a **modification of the original Parking Watch SF v0.1 code**, not a new
 - [Integration tests](tests/test_parking_watch.py) verify the request and response handling with mocked API calls. From a fresh checkout, run `python -m pip install -r requirements.txt pytest`, then `python -m pytest -q`. Live Drex and NDI calls require a Nace API key.
 - [Intern fork](https://github.com/benfeleke/intern) is the reviewer tool fork from [Nace's upstream repository](https://github.com/nace-ai/intern). Parking Watch's application code is in this repository.
 
+### Verify the Nace integration without credentials
+
+Run these commands from the repository root in a Python virtual environment.
+
+```bash
+python -m pip install -r requirements.txt pytest
+python -m pytest -q tests/test_parking_watch.py -k 'drex_image_decision or ndi_extract_request or ndi_parse_uses_console_route'
+```
+
+The three selected tests check the Drex image decision request and response, the NDI extraction request and citations, and the NDI parsing route and job status. The tests use mocked responses and make no external API calls.
+
 ## Fastest setup on a Mac
 
 1. Clone or download this repository. In Terminal, run `cd parking-watch && ./START_HERE.command`. You may also right-click the `.command` file in Finder and choose Open.
