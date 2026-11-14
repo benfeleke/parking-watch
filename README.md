@@ -2,6 +2,13 @@
 
 This is a **modification of the original Parking Watch SF v0.1 code**, not a new unrelated project. It retains the existing FastAPI server, dashboard, SQLite history, manual parking timer, and Twilio integration, and adds Nace AI Drex Max computer vision and NDI document extraction.
 
+## Hackathon review
+
+- [Drex decision model](server.py#L290-L339) sends a camera image and labeled references to Nace's `POST /v1/systemone`. The default model is `drex-max-v1.1`, and the app compares its returned probability with a detection threshold.
+- [NDI document parsing](server.py#L722-L728) and [NDI extraction](server.py#L792-L805) process SFMTA's parking guide through Nace's document APIs.
+- [Integration tests](tests/test_parking_watch.py) verify the request and response handling with mocked API calls. From a fresh checkout, run `python -m pip install -r requirements.txt pytest`, then `python -m pytest -q`. Live Drex and NDI calls require a Nace API key.
+- [Intern fork](https://github.com/benfeleke/intern) is the reviewer tool fork from [Nace's upstream repository](https://github.com/nace-ai/intern). Parking Watch's application code is in this repository.
+
 ## Fastest setup on a Mac
 
 1. Clone or download this repository. In Terminal, run `cd parking-watch && ./START_HERE.command`. You may also right-click the `.command` file in Finder and choose Open.
